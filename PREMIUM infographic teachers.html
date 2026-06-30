@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنفوجرافيك برنامج تدريب المعلمين</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Arabic Typesetting', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .infographic {
+            width: 100%;
+            max-width: 800px;
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
+            border-radius: 25px;
+            padding: 50px 40px;
+            color: white;
+            box-shadow: 0 50px 150px rgba(255, 215, 0, 0.15);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        /* ===== PATHWAYS SHOWCASE ===== */
+        .pathways-container {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .pathways-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .pathway-card {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .pathway-card:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        .pathway-number {
+            font-size: 32px;
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .pathway-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .pathway-price {
+            font-size: 18px;
+            color: #ffd700;
+            font-weight: bold;
+            background: rgba(255, 215, 0, 0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .pathways-footer {
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+            padding: 15px;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 10px;
+            color: #ff9999;
+        }
+
+        /* ===== PRICE COMPARISON ===== */
+        .price-comparison {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(0, 255, 127, 0.08) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .price-option {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .price-was {
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid #ff6b6b;
+        }
+
+        .price-was:hover {
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .price-now {
+            background: rgba(0, 255, 127, 0.15);
+            border: 3px solid #00ff7f;
+            transform: scale(1.05);
+        }
+
+        .price-now:hover {
+            background: rgba(0, 255, 127, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 255, 127, 0.2);
+        }
+
+        .price-label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .price-was .price-amount {
+            color: #ff9999;
+            text-decoration: line-through;
+        }
+
+        .price-now .price-amount {
+            color: #00ff7f;
+        }
+
+        .calculation {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .price-now .calculation {
+            color: #00ff7f;
+        }
+
+        /* ===== SAVINGS HIGHLIGHT ===== */
+        .savings-highlight {
+            background: linear-gradient(135deg, #00ff7f 0%, #00cc66 100%);
+            color: #000;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .savings-amount {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .savings-text {
+            font-size: 14px;
+        }
+
+        /* ===== BENEFITS ===== */
+        .benefits {
+            background: rgba(255, 215, 0, 0.08);
+            border-left: 5px solid #ffd700;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 13px;
+        }
+
+        .benefit-check {
+            color: #00ff7f;
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        /* ===== FOOTER CTA ===== */
+        .footer-cta {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1f2e;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .cta-main {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .cta-sub {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            background: #1a1f2e;
+            color: #ffd700;
+            padding: 15px 35px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .urgency-note {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .infographic {
+                padding: 30px 20px;
+            }
+
+            .header-title {
+                font-size: 28px;
+            }
+
+            .pathways-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-now {
+                transform: scale(1);
+            }
+
+            .benefit-list {
+                grid-template-columns: 1fr;
+            }
+
+            .price-amount {
+                font-size: 36px;
+            }
+
+            .savings-amount {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-icon">🎓</div>
+            <div class="header-title">برنامج تدريب المعلمين</div>
+            <div class="header-subtitle">7 مسارات متخصصة لتطويرك المهني</div>
+        </div>
+
+        <!-- PATHWAYS SHOWCASE -->
+        <div class="pathways-container">
+            <div class="section-title">7️⃣ مسارات متخصصة تختار منها:</div>
+            <div class="pathways-grid">
+                <div class="pathway-card">
+                    <div class="pathway-number">1️⃣</div>
+                    <div class="pathway-name">استراتيجيات التعلم النشط</div>
+                    <div class="pathway-price">$20</div>
+                </div>
+                <div class="pathway-card">
+                    <div class="pathway-number">2️⃣</div>
+                    <div class="pathway-name">تطبيق تصنيف بلوم الرقمي</div>
+                    <div class="pathway-price">$20</div>
+                </div>
+                <div class="pathway-card">
+                    <div class="pathway-number">3️⃣</div>
+                    <div class="pathway-name">إدارة الصف الذكية</div>
+                    <div class="pathway-price">$20</div>
+                </div>
+                <div class="pathway-card">
+                    <div class="pathway-number">4️⃣</div>
+                    <div class="pathway-name">التقويم والقياس الفعّال</div>
+                    <div class="pathway-price">$20</div>
+                </div>
+                <div class="pathway-card">
+                    <div class="pathway-number">5️⃣</div>
+                    <div class="pathway-name">الذكاء العاطفي في التعليم</div>
+                    <div class="pathway-price">$20</div>
+                </div>
+                <div class="pathway-card">
+                    <div class="pathway-number">6️⃣</div>
+                    <div class="pathway-name">مهارات التفكير الناقد</div>
+                    <div class="pathway-price">$20</div>
+                </div>
+            </div>
+
+            <div class="pathways-footer">
+                ⭐ تم إضافة مسار 7️⃣ خاص - "التطوير المهني المستمر"<br/>
+                كل مسار: $20 | اشتر كل المسارات معاً وحصل على خصم ضخم!
+            </div>
+        </div>
+
+        <!-- PRICE COMPARISON -->
+        <div class="price-comparison">
+            <div class="section-title" style="grid-column: 1/-1;">💰 المقارنة السعرية المذهلة</div>
+
+            <div class="comparison-grid">
+                <div class="price-option price-was">
+                    <div class="price-label">❌ إذا اشتريت كل مسار لوحده</div>
+                    <div class="price-amount">$140</div>
+                    <div class="calculation">7 مسارات × $20</div>
+                </div>
+
+                <div class="price-option price-now">
+                    <div class="price-label">✨ الآن! كل المسارات معاً</div>
+                    <div class="price-amount">$100</div>
+                    <div class="calculation">استثمر بذكاء! 🚀</div>
+                </div>
+            </div>
+
+            <div class="savings-highlight">
+                <div class="savings-amount">توفير $40! 🎉</div>
+                <div class="savings-text">أي ما نسبته 28% خصم على القيمة الكاملة</div>
+            </div>
+        </div>
+
+        <!-- BENEFITS -->
+        <div class="benefits">
+            <div class="section-title" style="border-bottom: 2px solid rgba(255, 215, 0, 0.3); margin-bottom: 15px;">✨ ماذا تحصل على:</div>
+            <div class="benefit-list">
+                <div class="benefit-item">
+                    <span class="benefit-check">✓</span>
+                    <span>21 ساعة تدريب متقدم</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-check">✓</span>
+                    <span>حضوري + رقمي مرن</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-check">✓</span>
+                    <span>شهادة معتمدة رسمية</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-check">✓</span>
+                    <span>دعم مباشر من المدربين</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-check">✓</span>
+                    <span>مواد تعليمية حصرية</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-check">✓</span>
+                    <span>وصول مدى الحياة للمحتوى</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER CTA -->
+        <div class="footer-cta">
+            <div class="cta-main">🚀 لا تتردد - احجز الآن!</div>
+            <div class="cta-sub">استثمر في نفسك بـ $100 فقط</div>
+            <button class="cta-button">احجز مقعدك الآن</button>
+            <div class="urgency-note">
+                ⏰ المقاعد محدودة جداً<br/>
+                📞 جامعة البلقاء التقنية | www.hawyaz.com
+            </div>
+        </div>
+    </div>
+</body>
+</html>
